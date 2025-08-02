@@ -1,4 +1,4 @@
-<pre> markdown ## 📁 Directory Structure ``` ├── Aditor/              
+<pre> ├── Aditor/              
 │   ├── Alice.sh
 │   ├── Configuration.txt
 │   ├── DataAudit
@@ -39,7 +39,7 @@
     ├── dataAuditv2.h
     ├── fileCompare
     ├── fileCompare.cpp
-    └── generalUtility.h ``` </pre>
+    └── generalUtility.h </pre>
 
 Algebraic Signature Based Demonstration Guidelines
 
