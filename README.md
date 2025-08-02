@@ -1,4 +1,4 @@
-<pre> ├── Aditor/              
+<pre>├── Aditor/              
 │   ├── Alice.sh
 │   ├── Configuration.txt
 │   ├── DataAudit
