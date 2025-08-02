@@ -1,3 +1,48 @@
+
+FOG-CPS-Data-Auditing/
+├── Aditor/              
+│   ├── Alice.sh              #
+│   ├── Configuration.txt     #
+|   ├── DataAudit             # The main data auditing software
+|   ├── Failure_Msg.ogg       #
+|   └── Success_Msg.ogg       #
+
+├── Auditee/              
+│   ├── 15MBData.csv         #
+│   ├── 15MBData2.csv        #
+│   ├── Attack               #
+│   ├── Bob.sh               #
+│   ├── Configuration.txt    #
+|   ├── DataAudit            # The main data auditing software
+|   └── fileCompare          #
+
+├── CSP-Admin/              
+│   ├── Configuration.txt    # 
+|   ├── DataAudit            # The main data auditing software
+|   └── SetupTagGen.sh       #
+
+├── Experimentation Scripts/    
+│   ├── Accuracy Testing/    
+|   |   └── ChallengeResponse.sh         #
+│   └── Time Measurement/
+|       ├── MeasureProofGenTime.sh       #
+|       ├── MeasureProofVerifyTime.sh    #
+|       ├── MeasureSetupTime.sh          #
+|       ├── MeasureTagGenTime.sh         #
+|       └── SetupTagGen.sh               #
+
+└── Source Codes/
+    ├── Attack             #
+    ├── Attack.cpp         #
+    ├── DataAudit          #
+    ├── DataAudit.cpp      #
+    ├── Makefile           #
+    ├── dataAuditutils.h   #
+    ├── dataAuditv2.h      #
+    ├── fileCompare        #
+    ├── fileCompare.cpp    #
+    └── generalUtility.h   #
+
 Algebraic Signature Based Demonstration Guidelines
 
 Initial Content of CSP-Admin:-
