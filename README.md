@@ -47,11 +47,34 @@ FOG-CPS Data Auditing
 ```
 
 ## 🚀 How to Use This Repository?
+You can test it in three different systems connected by a network - one system working as the cloud (Admin), one acting as the auditor and the other one acting as the auditee. However, you can also test it on a single system (in different terminals). Our files are written assuming the testing to be done on same system. Make the changes accordingly if you test on different systems.
 
 - clone the repository
-- Go inside CSP-Admin dir and run:-
-  `chmod +x SetupTagGen.sh DataAudit`
-- Make sure that the path and filename of the Data file is properly mentioned in the  `SetupTagGen.sh` script
+- copy the "CSP-Admin" directory into the cloud (Admin) system
+- copy the "Aditor" directory into the aditor system
+- copy the "Auditee" directory into the auditee system
+- Go inside "CSP-Admin" dir:-
+    - make sure that the path and filename of the data-file (file to be audited) is properly mentioned in the  `SetupTagGen.sh` script
+    - run the following command on a terminal opened inside the dir:-
+      ```
+      chmod +x SetupTagGen.sh DataAudit
+      ./SetupTagGen.sh
+      ```
+    - the above will generate the admin's secret-key *alpha*, the public parameters *params* and the *metadata* of the data-file using *alpha* and *params*
+    - copy the params file (`Params.bin`) to both "Aditor" and "Auditee" directories
+    - copy only the *metadata* file (`metaData.bin`) to "Aditor" dir only
+- Go inside "Auditor" dir:-
+    - set the Auditee’s IP address inside `Alice.sh` (set `127.0.0.1` for localhost)
+    - run the following command on a terminal opened inside the dir:-
+      ```
+      chmod +x Alice.sh DataAudit
+      ```
+- Go inside "Auditee" dir:-
+    - set the Auditor’s IP address inside `Bob.sh` (set `127.0.0.1` for localhost)
+    - run the following command on a terminal opened inside the dir:-
+      ```
+      chmod +x Bob.sh DataAudit Attack fileCompare
+      ```
 
 
 
@@ -60,21 +83,6 @@ FOG-CPS Data Auditing
 
 
 
-
-
-Step-2: Run the ‘SetupTagGen.sh’ script in Admin
-Step-3: copy the params file (‘Params.bin’) from Admin to both Alice and Bob
-Step-4: copy only the metadata file (‘metaData.bin’) from Admin to Alice only
-
-Go inside Auditee dir and run:-
-chmod +x Bob.sh DataAudit Attack fileCompare
-Step-5: correct the Auditor’s IP address inside ‘Bob.sh’ (set 127.0.0.1 for localhost)
-
-Go inside Auditor dir and run:-
-chmod +x Alice.sh DataAudit
-Step-6: correct the Auditee’s IP address inside ‘Alice.sh’ (set 127.0.0.1 for localhost)
-
-Step-7: Upload Bob Folder in server machine
 Step-8: Open three terminals:-
 One inside the Auditor (Alice)
 Two inside the Auditee (Bob) - may also login remotely using ssh
