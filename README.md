@@ -1,25 +1,31 @@
-<pre>├── Aditor/              
-│   ├── Alice.sh            # required to set itself Port number as well as Bob's IP and Port number, then as per the auditing instance   |                             it generates the challenege string and send it to Bob and wait for respond, then varify the integrity as   |                             per the challenge give the sound and display message as per the result.
-│   ├── Configuration.txt    # setup the data-file sector-size, no. of sectors per block, size of 'p' and 'q', Percentage of blocks to be |                               challenged, and some debug flags.
-│   ├── DataAudit            # The main executable software
-│   ├── Failure_Msg.ogg      # failure message audio file for demonstartion purpose
-│   └── Success_Msg.ogg      # success message audio file for demonstartion purpose
+# FOG-CPS Data Auditing
 
+## 📁 Project Structure
+
+```
+FOG-CPS Data Auditing
+├── Aditor/              
+│   ├── Alice.sh            # SHELL script for auditor's protocol    
+│   ├── Configuration.txt   # Protocol configuration and debug parameters
+│   ├── DataAudit           # [executable] the main data-auditing software
+│   ├── Failure_Msg.ogg     # supporting audio file 
+│   └── Success_Msg.ogg     # supporting audio file
+│
 ├── Auditee/              
-│   ├── 15MBData.csv            # The original data-file that needs to be verification.
-│   ├── 15MBData2.csv           # The backup of the original data-file.
-│   ├── Attack                  # The attack software
-│   ├── Bob.sh                  # required to set itself Port number as well as Alice's IP and Port number, then as per the auditing      |                                 instance received from Alice as in form of the challenege string send the respond back to the Alice.
-│   ├── Configuration.txt       # setup the data-file sector-size, no. of sectors per block, size of 'p' and 'q', Percentage of blocks to |                                 be challenged, and some debug flags.
-│   ├── DataAudit               # The main executable software
-│   └── fileCompare             # this software used for check the files after attack performed.
-
+│   ├── 15MBData.csv        # A sample data-file 
+│   ├── 15MBData2.csv       # Copy of the sample data-file
+│   ├── Bob.sh              # SHELL script for auditee's protocol 
+│   ├── Configuration.txt   # Protocol configuration and debug parameters
+│   ├── DataAudit           # [executable] the main data-auditing software
+│   ├── Attack              # [executable] the attack-software
+│   └── fileCompare         # [executable] software for comparing the difference between two data-files
+│
 ├── CSP-Admin/              
-│   ├── Configuration.txt        # setup the data-file sector-size, no. of sectors per block, size of 'p' and 'q', Percentage of blocks  |                                  to be challenged, and some debug flags.
-│   ├── DataAudit                # The main executable software
-│   └── SetupTagGen.sh           # required data-file path and do setup and tag generation phase.
-
-├── Experimentation Scripts/
+│   ├── Configuration.txt   # Protocol configuration and debug parameters
+│   ├── DataAudit           # [executable] the main data-auditing software
+│   └── SetupTagGen.sh      # SHELL script for admin's protocol
+│
+├── Experimentation Scripts/ # SHELL scripts for accuracy and execution-time measurement
 │   ├── Accuracy Testing/
 │   │   └── ChallengeResponse.sh
 │   └── Time Measurement/
@@ -28,39 +34,24 @@
 │       ├── MeasureSetupTime.sh
 │       ├── MeasureTagGenTime.sh
 │       └── SetupTagGen.sh
-
-└── Source Codes/
-    ├── Attack
-    ├── Attack.cpp
-    ├── DataAudit
+│
+└── Source Codes/            # All source codes
     ├── DataAudit.cpp
-    ├── Makefile
     ├── dataAuditutils.h
     ├── dataAuditv2.h
-    ├── fileCompare
-    ├── fileCompare.cpp
-    └── generalUtility.h </pre>
+    ├── generalUtility.h
+    ├── Attack.cpp
+    ├── fileCompare.cpp    
+    └── Makefile
 
-Algebraic Signature Based Demonstration Guidelines
+```
 
-Initial Content of CSP-Admin:-
-DataAudit (main s/w)
-Configuration.txt   (configuration file)
-SetupTagGen.sh (Script to generate key materials and metadata)
-Initial Content of Auditor (Alice):-
-DataAudit (main s/w)
-Configuration.txt   (configuration file)
-Success_Msg.ogg (Success message audio file)
-Failure_Msg.ogg (Failure message audio file)
-Alice.sh (The main Auditor Script)
-Initial Content of Auditee / Storage (Bob):-
-Data_File
-Backup of the Data_file
-DataAudit (main s/w)
-Configuration.txt   (configuration file)
-Attack (attack s/w - specify attack proportion & blocksize)
-fileCompare (s/w to compare between two files - mismatching blocks) [optional]
-Bob.sh (The main Auditee Script)
+## 🚀 How to Use This Repository?
+
+- clone the repository
+- Go inside CSP-Admin dir and run:-
+  `chmod +x SetupTagGen.sh DataAudit`
+- Make sure that the path and filename of the Data file is properly mentioned in the  `SetupTagGen.sh` script
 
 
 
@@ -68,9 +59,9 @@ Bob.sh (The main Auditee Script)
 
 
 
-Go inside CSP-Admin dir and run:-
-chmod +x SetupTagGen.sh DataAudit
-Step-1: Make sure that the path and filename of the Data file is properly mentioned in the  ‘SetupTagGen.sh’ script
+
+
+
 Step-2: Run the ‘SetupTagGen.sh’ script in Admin
 Step-3: copy the params file (‘Params.bin’) from Admin to both Alice and Bob
 Step-4: copy only the metadata file (‘metaData.bin’) from Admin to Alice only
