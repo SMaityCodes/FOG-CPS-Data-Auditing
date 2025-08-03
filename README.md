@@ -45,6 +45,7 @@ FOG-CPS Data Auditing
     └── Makefile
 
 ```
+Note that the copies of Configuration.txt file in all three directories - Auditor, Auditee and CSP-Admin must be consistent.
 
 ## 🚀 How to Use This Repository?
 You can test it in three different systems connected by a network - one system working as the cloud (Admin), one acting as the auditor and the other one acting as the auditee. However, you can also test it on a single system (in different terminals). Our files are written assuming the testing to be done on same system. Make the changes accordingly if you test on different systems.
@@ -77,42 +78,64 @@ You can test it in three different systems connected by a network - one system w
       ```
 
 
+Now, we are ready to start the periodic data-audit process. Make sure the audio system in "Auditor" machine is turned on.
+
+- Open two terminals: one inside the "Auditor" (Alice), and one inside the "Auditee" (Bob)
+- run `./Bob.sh` inside "Auditee"
+- run `./Alice.sh` inside "Auditor"
+
+Observe the Auditor's terminal for some duration of time - verification must be successful in all instances. 
+
+Now, we'll test the impact of attack. For this purpose we'll invoke our simulated attack software.
+
+- Open another terminal inside the "Auditee" (Bob)
+- to invoke the attacker on the data-file, execute the following command:-
+    - `./Attack <filename> <attack_proportion> <blocksize>` 
+    - For example :
+      ```
+        ./Attack 15MBData.csv  0.01 2000
+    ```
+    - where:-
+        - the data-file name is '15MBData.csv'
+        - blocksize = 2000 (bytes) and,
+        - attack_proportion = 0.01
+
+Attack should be immediately detected at the Auditor's terminal. 
+
+To restore the original data-file run the following command:-
+
+ `cp 15MBData2.csv 15MBData.csv`
 
 
+In each of the directories : Auditor, Auditee and Admin - a `Statistics.txt` file will be generated. These files will report the  execution times of each instance of the following algorithms:-
 
+- Setup Time
+- Average Tag Generation Time (for one block) 
+- Proof Generation Time (excluding Disk I/O and chellenge-vector generation time)
+- Proof Verification Time (excluding Disk I/O and chellenge-vector generation time)
 
-
-
-Step-8: Open three terminals:-
-One inside the Auditor (Alice)
-Two inside the Auditee (Bob) - may also login remotely using ssh
-Step-9: Run ./Bob.sh inside one of the terminals in Bob
-Step-10: Run ./Alice.sh inside Alice
-
-Step-11: Observe for some time - verification must be successful in all instances
-Step-12: Now Run the Attack program inside the other terminal in Bob 
-(./Attack <filename> <attack_proportion> <blocksize>) 
-E.g.:
-./Attack 15MBData.csv  0.01 2000
-blocksize = 2000; 
-attack_proportion = 0.01 (may reduce also)
-Step-13: Attack should be immediately detected by Alice 
-
- Step-14: In Each of the folders : Alice, Bob and Admin - ‘Statistics.txt’ file will be generated - check the  execution times from there
-
-To check the correctness of the Attack program we have the ‘filecompare’ program. To compare between two files run  it:-
-
+To check the correctness of our simulated Attack program, we have the `filecompare` program. To compare the difference between two files run the following command on a terminal inside the Auditee dir:-
+```
 ./fileCompare <filename1> <filename2> <blocksize>
+```
 
-e.g.:-
 
+For example:-
+```
 ./fileCompare 15MBData.csv 15MBData2.csv 2000
+```
+Note that file1 and file2 must be of the same size.
 
+The above command will report the following:-
+- Total number of blocks in the files
+- Total no. of mismatching blocks between the two files
+- Proportion of mismatching blocks 
+- List of all mismatching block-indices
 
-To Compile the Source Codes:-
-
+Although our repository is pre-compiled, you may still compile the source codes to regenerate the executable files: `DataAudit`, `Attack` and `fileCompare`, specially if you wish to make any modifications to the source codes. All the souce codes are kept inside the "Source Codes" directory. To Compile the codes, cd inside the directory and run the following:-
+```
 make clean
- // removes all the precompiled executables in this directory
-
 make
-// compiles all the source codes
+```
+
+In order to perform experimentataion with our developped software we have also provided a set of SHELL scripts kept inside the "Experimentation Scripts" directory. You may use these scripts to measure the accuracy of attack detection or, the average execution time of the different algorithms for different protocol configuration parameters or, for different attack intensities or different file-sizes etc.
