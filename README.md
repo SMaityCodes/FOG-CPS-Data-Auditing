@@ -1,23 +1,23 @@
 <pre>├── Aditor/              
-│   ├── Alice.sh
-│   ├── Configuration.txt
-│   ├── DataAudit
-│   ├── Failure_Msg.ogg
-│   └── Success_Msg.ogg
+│   ├── Alice.sh            # required to set itself Port number as well as Bob's IP and Port number, then as per the auditing instance   |                             it generates the challenege string and send it to Bob and wait for respond, then varify the integrity as   |                             per the challenge give the sound and display message as per the result.
+│   ├── Configuration.txt    # setup the data-file sector-size, no. of sectors per block, size of 'p' and 'q', Percentage of blocks to be |                               challenged, and some debug flags.
+│   ├── DataAudit            # The main executable software
+│   ├── Failure_Msg.ogg      # failure message audio file for demonstartion purpose
+│   └── Success_Msg.ogg      # success message audio file for demonstartion purpose
 
 ├── Auditee/              
-│   ├── 15MBData.csv
-│   ├── 15MBData2.csv
-│   ├── Attack
-│   ├── Bob.sh
-│   ├── Configuration.txt
-│   ├── DataAudit
-│   └── fileCompare
+│   ├── 15MBData.csv            # The original data-file that needs to be verification.
+│   ├── 15MBData2.csv           # The backup of the original data-file.
+│   ├── Attack                  # The attack software
+│   ├── Bob.sh                  # required to set itself Port number as well as Alice's IP and Port number, then as per the auditing      |                                 instance received from Alice as in form of the challenege string send the respond back to the Alice.
+│   ├── Configuration.txt       # setup the data-file sector-size, no. of sectors per block, size of 'p' and 'q', Percentage of blocks to |                                 be challenged, and some debug flags.
+│   ├── DataAudit               # The main executable software
+│   └── fileCompare             # this software used for check the files after attack performed.
 
 ├── CSP-Admin/              
-│   ├── Configuration.txt
-│   ├── DataAudit
-│   └── SetupTagGen.sh
+│   ├── Configuration.txt        # setup the data-file sector-size, no. of sectors per block, size of 'p' and 'q', Percentage of blocks  |                                  to be challenged, and some debug flags.
+│   ├── DataAudit                # The main executable software
+│   └── SetupTagGen.sh           # required data-file path and do setup and tag generation phase.
 
 ├── Experimentation Scripts/
 │   ├── Accuracy Testing/
