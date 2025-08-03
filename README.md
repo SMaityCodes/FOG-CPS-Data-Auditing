@@ -45,7 +45,22 @@ FOG-CPS Data Auditing
     └── Makefile
 
 ```
-Note that the copies of Configuration.txt file in all three directories - Auditor, Auditee and CSP-Admin must be consistent.
+**Note**: the copies of the `Configuration.txt` file in all three directories - "Auditor", "Auditee" and "CSP-Admin" must be consistent.
+
+## ⚙️ Prerequisite:-
+
+- UNIX OS (Ubuntu)
+- GNU Compiler Collection (GCC)
+- Crypto++ Library
+
+In order to install Crypto++, run the following:-
+```
+sudo apt-cache pkgnames | grep -i crypto++
+sudo apt-get install libcrypto++-utils
+sudo apt-get install libcrypto++8
+sudo apt-get install libcrypto++-dev
+sudo apt-get install libcrypto++-doc
+```
 
 ## 🚀 How to Use This Repository?
 You can test it in three different systems connected by a network - one system working as the cloud (Admin), one acting as the auditor and the other one acting as the auditee. However, you can also test it on a single system (in different terminals). Our files are written assuming the testing to be done on same system. Make the changes accordingly if you test on different systems.
@@ -54,6 +69,9 @@ You can test it in three different systems connected by a network - one system w
 - copy the "CSP-Admin" directory into the cloud (Admin) system
 - copy the "Aditor" directory into the aditor system
 - copy the "Auditee" directory into the auditee system
+
+### Configure the Aditor, Auditee and the CSP-Admin
+
 - Go inside "CSP-Admin" dir:-
     - make sure that the path and filename of the data-file (file to be audited) is properly mentioned in the  `SetupTagGen.sh` script
     - run the following command on a terminal opened inside the dir:-
@@ -77,6 +95,7 @@ You can test it in three different systems connected by a network - one system w
       chmod +x Bob.sh DataAudit Attack fileCompare
       ```
 
+### Start Data Audit
 
 Now, we are ready to start the periodic data-audit process. Make sure the audio system in "Auditor" machine is turned on.
 
@@ -85,6 +104,8 @@ Now, we are ready to start the periodic data-audit process. Make sure the audio 
 - run `./Alice.sh` inside "Auditor"
 
 Observe the Auditor's terminal for some duration of time - verification must be successful in all instances. 
+
+### Launch Attack
 
 Now, we'll test the impact of attack. For this purpose we'll invoke our simulated attack software.
 
@@ -106,13 +127,16 @@ To restore the original data-file run the following command:-
 
  `cp 15MBData2.csv 15MBData.csv`
 
+## 🛠️ Observing Statistics
 
-In each of the directories : Auditor, Auditee and Admin - a `Statistics.txt` file will be generated. These files will report the  execution times of each instance of the following algorithms:-
+In each of the directories : "Auditor", "Auditee" and "CSP-Admin" - a `Statistics.txt` file will be generated. These files will report the  execution times of each instance of the following algorithms:-
 
 - Setup Time
 - Average Tag Generation Time (for one block) 
 - Proof Generation Time (excluding Disk I/O and chellenge-vector generation time)
 - Proof Verification Time (excluding Disk I/O and chellenge-vector generation time)
+
+## 🔨 Verifying the Correctness of the Simulated Attack-tool
 
 To check the correctness of our simulated Attack program, we have the `filecompare` program. To compare the difference between two files run the following command on a terminal inside the Auditee dir:-
 ```
@@ -132,10 +156,22 @@ The above command will report the following:-
 - Proportion of mismatching blocks 
 - List of all mismatching block-indices
 
+## 🚧 The Source Codes
+
 Although our repository is pre-compiled, you may still compile the source codes to regenerate the executable files: `DataAudit`, `Attack` and `fileCompare`, specially if you wish to make any modifications to the source codes. All the souce codes are kept inside the "Source Codes" directory. To Compile the codes, cd inside the directory and run the following:-
 ```
 make clean
 make
 ```
+## 🧩 Experimentation
 
 In order to perform experimentataion with our developped software we have also provided a set of SHELL scripts kept inside the "Experimentation Scripts" directory. You may use these scripts to measure the accuracy of attack detection or, the average execution time of the different algorithms for different protocol configuration parameters or, for different attack intensities or different file-sizes etc.
+
+## 🙌 Credits:-
+
+[🔝 Back to Top](#)
+
+- JUNAID ALAM
+- DR. SOUMYADEV MAITY 
+
+This work is part of the Project titled "Reliable and Privacy Preserving Data Auditing for FOG assisted Cyber Physical Systems (FOG-CPS)" funded by C3I-Hub, IIT Kanpur, Proposal Number: 1045, Sanction Order No.: IHUB-NTIHAC/2021/01/3.
